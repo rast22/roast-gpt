@@ -9,4 +9,6 @@ RUN pip install -r requirements.txt
 ADD main.py .
 ADD config.py .
 
-CMD ["python", "-u", "./main.py"] 
+RUN mkdir -p /data
+
+CMD ["python", "-u", "./main.py"]
