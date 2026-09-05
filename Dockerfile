@@ -8,6 +8,7 @@ RUN pip install -r requirements.txt
 
 ADD main.py .
 ADD config.py .
+ADD settings.py .
 
 RUN mkdir -p /data
 
