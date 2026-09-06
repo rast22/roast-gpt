@@ -87,12 +87,12 @@ The new model, editor, history limits and mention-only behavior apply by default
 - Ordinary incoming messages still build context. Receiving a message and replying to it are separate decisions.
 - With `MENTION_ONLY=false`, the original automatic behavior is available: whitelist/fuzzy eligibility followed by an 8-10 roast score, plus the legacy `wordle bot` trigger. The inexpensive `gpt-4o-mini` scores messages; `ROAST_MODEL` writes the jokes. Frequency settings remain in `config.py`.
 - Blacklisted usernames are excluded from every trigger. Bot messages are ignored.
-- The prompt asks for 1-2 sentences, a concrete comic observation and a strong ending. It allows harsh language while telling the model to respect genuine distress and requests to stop.
+- The prompt requests a 9/10 roast tone: a direct vulgar insult tied to the person's behavior, a concrete callback and a harsh ending in 1-3 sentences. The model is instructed to respect genuine distress and requests to stop.
 - Requests about another user name that user explicitly. The prompt asks for example messages if the target has no material in context.
 
 ## Jokes and the editing pass
 
-Edit [prompts/roast.md](prompts/roast.md) to change the personality. [prompts/humanizer.md](prompts/humanizer.md) contains the runtime editing rules inspired by the Humanizer skill: remove stock openings, vague insults, stale comparisons, translated phrasing, explanations after the punchline and invented facts. The editor should preserve profanity and an already good joke.
+Edit [prompts/roast.md](prompts/roast.md) to change the personality. Its examples demonstrate blunt, vulgar attacks on specific behavior. [prompts/humanizer.md](prompts/humanizer.md) contains the runtime editing rules inspired by the Humanizer skill: remove stock openings, vague insults, stale comparisons, translated phrasing, explanations after the punchline and invented facts. The editor must preserve direct insults and profanity, strengthen mild drafts and fix clumsy wording without replacing it with polite euphemisms. The 9/10 label describes the requested voice; it is not a measured output score.
 
 `HUMANIZE_ROASTS=true` makes two sequential model requests per reply, sending the available context to both. If editing fails, the completed draft is sent. Set it to `false` to use one request. Larger histories and the stronger model increase API cost. `ROAST_MODEL=gpt-5.4-mini` or `gpt-4.1` also work, but gave weaker results in the small Russian comparison. See the [model and comedy research notes](docs/roast-design.md) for examples, sources and limitations.
 
