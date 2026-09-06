@@ -9,6 +9,8 @@ RUN pip install -r requirements.txt
 ADD main.py .
 ADD config.py .
 ADD settings.py .
+ADD history.py .
+COPY prompts/ ./prompts/
 
 RUN mkdir -p /data
 

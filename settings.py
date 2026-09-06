@@ -6,6 +6,8 @@ import re
 from dataclasses import dataclass
 from pathlib import Path
 
+import config
+
 
 def _list_value(value, name):
     value = (value or "").strip()
@@ -70,6 +72,16 @@ def parse_bool(value, name="CLEAR_CHAT_HISTORY"):
     raise ValueError(f"{name} must be true or false (also accepts 1/0, yes/no, on/off).")
 
 
+def parse_int(value, name, minimum, maximum):
+    try:
+        number = int(value)
+    except (TypeError, ValueError):
+        raise ValueError(f"{name} must be an integer between {minimum} and {maximum}.") from None
+    if not minimum <= number <= maximum:
+        raise ValueError(f"{name} must be between {minimum} and {maximum}.")
+    return number
+
+
 @dataclass(frozen=True)
 class Settings:
     telegram_token: str
@@ -79,6 +91,12 @@ class Settings:
     target_chat_ids: tuple[int, ...]
     clear_chat_history: bool
     history_path: Path
+    roast_model: str = config.ROAST_MODEL
+    roast_reasoning_effort: str = config.ROAST_REASONING_EFFORT
+    humanize_roasts: bool = True
+    mention_only: bool = True
+    chat_history_length: int = config.CHAT_HISTORY_LENGTH
+    context_max_bytes: int = config.CONTEXT_MAX_BYTES
 
     @classmethod
     def from_env(cls, environ=None):
@@ -89,6 +107,9 @@ class Settings:
             raise ValueError("TELEGRAM_TOKEN is required.")
         if not openai_token:
             raise ValueError("OPENAI_TOKEN (or OPENAI_API_KEY) is required.")
+        reasoning_effort = env.get("ROAST_REASONING_EFFORT", config.ROAST_REASONING_EFFORT).strip().lower()
+        if reasoning_effort not in ("none", "low", "medium"):
+            raise ValueError("ROAST_REASONING_EFFORT must be none, low or medium.")
         return cls(
             telegram_token=telegram_token,
             openai_token=openai_token,
@@ -97,4 +118,10 @@ class Settings:
             target_chat_ids=parse_chat_ids(env.get("TARGET_CHAT_ID")),
             clear_chat_history=parse_bool(env.get("CLEAR_CHAT_HISTORY")),
             history_path=Path(env.get("CHAT_HISTORY_PATH") or "/data/chat_history.json"),
+            roast_model=env.get("ROAST_MODEL", "").strip() or config.ROAST_MODEL,
+            roast_reasoning_effort=reasoning_effort,
+            humanize_roasts=parse_bool(env.get("HUMANIZE_ROASTS", "true"), "HUMANIZE_ROASTS"),
+            mention_only=parse_bool(env.get("MENTION_ONLY", "true"), "MENTION_ONLY"),
+            chat_history_length=parse_int(env.get("CHAT_HISTORY_LENGTH", config.CHAT_HISTORY_LENGTH), "CHAT_HISTORY_LENGTH", 1, 5000),
+            context_max_bytes=parse_int(env.get("CONTEXT_MAX_BYTES", config.CONTEXT_MAX_BYTES), "CONTEXT_MAX_BYTES", 4096, 200000),
         )

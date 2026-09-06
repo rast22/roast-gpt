@@ -1,0 +1,378 @@
+[
+  {
+    "phase": "draft_comparison",
+    "model": "gpt-4o-mini",
+    "case": "ru_productivity",
+    "request": "@roast_bot три часа выбирал приложение для продуктивности и опять нихуя не сделал",
+    "draft": "Три часа выбирал, чтобы потом все равно никуда не спешить? Ты не к продуктивности идёшь, а к чемпионату по procrastination.",
+    "seconds": 2.21,
+    "finish_reason": "stop",
+    "tokens": {
+      "usage": {
+        "prompt_tokens": 1195,
+        "completion_tokens": 35,
+        "total_tokens": 1230
+      }
+    }
+  },
+  {
+    "phase": "draft_comparison",
+    "model": "gpt-4o-mini",
+    "case": "ru_target_callback",
+    "request": "@roast_bot что думаешь о @max?",
+    "draft": "@max, твой план начать бегать в шесть с утра звучит как очередная размеры понтов. Если ты даже курьера проспал, то и в кроссовках за 25 тысяч не убежишь.",
+    "seconds": 2.13,
+    "finish_reason": "stop",
+    "tokens": {
+      "usage": {
+        "prompt_tokens": 1264,
+        "completion_tokens": 47,
+        "total_tokens": 1311
+      }
+    }
+  },
+  {
+    "phase": "draft_comparison",
+    "model": "gpt-4o-mini",
+    "case": "ru_failed_flex",
+    "request": "@roast_bot за выходные посмотрел 12 часов видео про бизнес, теперь думаю увольняться и открывать своё",
+    "draft": "@Лёша, надеюсь, ты запомнил все 12 часов, чтобы хоть на одном собеседовании не выглядеть как полный ноль.",
+    "seconds": 2.04,
+    "finish_reason": "stop",
+    "tokens": {
+      "usage": {
+        "prompt_tokens": 1212,
+        "completion_tokens": 32,
+        "total_tokens": 1244
+      }
+    }
+  },
+  {
+    "phase": "draft_comparison",
+    "model": "gpt-4o-mini",
+    "case": "ru_short",
+    "request": "@roast_bot объяснил девушке, что я альфа, теперь она не отвечает",
+    "draft": "А может, она просто поняла, что \"альфа\" — это не должность, а состояние ума?",
+    "seconds": 0.95,
+    "finish_reason": "stop",
+    "tokens": {
+      "usage": {
+        "prompt_tokens": 1181,
+        "completion_tokens": 24,
+        "total_tokens": 1205
+      }
+    }
+  },
+  {
+    "phase": "draft_comparison",
+    "model": "gpt-4.1",
+    "case": "ru_productivity",
+    "request": "@roast_bot три часа выбирал приложение для продуктивности и опять нихуя не сделал",
+    "draft": "Судя по продуктивности, ты бы и приложение выбирал через приложение.",
+    "seconds": 0.86,
+    "finish_reason": "stop",
+    "tokens": {
+      "usage": {
+        "prompt_tokens": 1195,
+        "completion_tokens": 17,
+        "total_tokens": 1212
+      }
+    }
+  },
+  {
+    "phase": "draft_comparison",
+    "model": "gpt-4.1",
+    "case": "ru_target_callback",
+    "request": "@roast_bot что думаешь о @max?",
+    "draft": "@max, твои кроссовки уже отбегали больше, чем ты.",
+    "seconds": 1.09,
+    "finish_reason": "stop",
+    "tokens": {
+      "usage": {
+        "prompt_tokens": 1264,
+        "completion_tokens": 18,
+        "total_tokens": 1282
+      }
+    }
+  },
+  {
+    "phase": "draft_comparison",
+    "model": "gpt-4.1",
+    "case": "ru_failed_flex",
+    "request": "@roast_bot за выходные посмотрел 12 часов видео про бизнес, теперь думаю увольняться и открывать своё",
+    "draft": "Лёша, после твоих подвигов с резюме твой бизнес начнётся так же бодро: полгода выглядеть занятым, а потом завести ещё одну вкладку “мотивация”.",
+    "seconds": 1.18,
+    "finish_reason": "stop",
+    "tokens": {
+      "usage": {
+        "prompt_tokens": 1212,
+        "completion_tokens": 47,
+        "total_tokens": 1259
+      }
+    }
+  },
+  {
+    "phase": "draft_comparison",
+    "model": "gpt-4.1",
+    "case": "ru_short",
+    "request": "@roast_bot объяснил девушке, что я альфа, теперь она не отвечает",
+    "draft": "Видимо, она решила, что вымирающие виды в личке не нужны.",
+    "seconds": 1.08,
+    "finish_reason": "stop",
+    "tokens": {
+      "usage": {
+        "prompt_tokens": 1181,
+        "completion_tokens": 18,
+        "total_tokens": 1199
+      }
+    }
+  },
+  {
+    "phase": "draft_comparison",
+    "model": "gpt-5.4-mini",
+    "case": "ru_productivity",
+    "request": "@roast_bot три часа выбирал приложение для продуктивности и опять нихуя не сделал",
+    "draft": "Три часа выбирал приложение, чтобы не делать задачи — уже сам по себе productivity app. Осталось найти такое, где и без дела чувствуешь себя молодцом.",
+    "seconds": 1.06,
+    "finish_reason": "stop",
+    "tokens": {
+      "usage": {
+        "prompt_tokens": 1194,
+        "completion_tokens": 38,
+        "total_tokens": 1232
+      }
+    }
+  },
+  {
+    "phase": "draft_comparison",
+    "model": "gpt-5.4-mini",
+    "case": "ru_target_callback",
+    "request": "@roast_bot что думаешь о @max?",
+    "draft": "Кроссовки у тебя уже как у олимпийца, а режим — как у человека, которого курьер из жизни вытащил.",
+    "seconds": 1.82,
+    "finish_reason": "stop",
+    "tokens": {
+      "usage": {
+        "prompt_tokens": 1263,
+        "completion_tokens": 33,
+        "total_tokens": 1296
+      }
+    }
+  },
+  {
+    "phase": "draft_comparison",
+    "model": "gpt-5.4-mini",
+    "case": "ru_failed_flex",
+    "request": "@roast_bot за выходные посмотрел 12 часов видео про бизнес, теперь думаю увольняться и открывать своё",
+    "draft": "12 часов бизнеса посмотрел — теперь уже инвестор в собственной фантазии. Сначала бы одно резюме отправил, предприниматель по расписанию, блядь.",
+    "seconds": 1.21,
+    "finish_reason": "stop",
+    "tokens": {
+      "usage": {
+        "prompt_tokens": 1211,
+        "completion_tokens": 40,
+        "total_tokens": 1251
+      }
+    }
+  },
+  {
+    "phase": "draft_comparison",
+    "model": "gpt-5.4-mini",
+    "case": "ru_short",
+    "request": "@roast_bot объяснил девушке, что я альфа, теперь она не отвечает",
+    "draft": "Ты ей объяснил, что ты альфа, и она, похоже, решила не спорить с диагнозом.",
+    "seconds": 0.96,
+    "finish_reason": "stop",
+    "tokens": {
+      "usage": {
+        "prompt_tokens": 1180,
+        "completion_tokens": 27,
+        "total_tokens": 1207
+      }
+    }
+  },
+  {
+    "phase": "editor_comparison",
+    "model": "gpt-4.1",
+    "case": "ru_productivity",
+    "request": "@roast_bot три часа выбирал приложение для продуктивности и опять нихуя не сделал",
+    "draft": "Макс, это у тебя «продуктивность» означает каждый раз новый способ не приступать к делам?",
+    "final": "Макс, у тебя даже прокрастинация идёт по чек-листу.",
+    "seconds": 2.26,
+    "finish_reason": "stop",
+    "edit_finish_reason": "stop",
+    "tokens": {
+      "usage": {
+        "prompt_tokens": 1195,
+        "completion_tokens": 24,
+        "total_tokens": 1219
+      },
+      "edit_usage": {
+        "prompt_tokens": 1775,
+        "completion_tokens": 18,
+        "total_tokens": 1793
+      }
+    }
+  },
+  {
+    "phase": "editor_comparison",
+    "model": "gpt-4.1",
+    "case": "ru_target_callback",
+    "request": "@roast_bot что думаешь о @max?",
+    "draft": "@max, твои кроссовки пробежали больше, чем ты сам.",
+    "final": "@max, твои кроссовки пробежали больше, чем ты сам.",
+    "seconds": 1.88,
+    "finish_reason": "stop",
+    "edit_finish_reason": "stop",
+    "tokens": {
+      "usage": {
+        "prompt_tokens": 1264,
+        "completion_tokens": 18,
+        "total_tokens": 1282
+      },
+      "edit_usage": {
+        "prompt_tokens": 1837,
+        "completion_tokens": 18,
+        "total_tokens": 1855
+      }
+    }
+  },
+  {
+    "phase": "editor_comparison",
+    "model": "gpt-4.1",
+    "case": "ru_failed_flex",
+    "request": "@roast_bot за выходные посмотрел 12 часов видео про бизнес, теперь думаю увольняться и открывать своё",
+    "draft": "@alex, ну теперь ты точно готов никуда не устраиваться — и не работать, и не увольняться, чисто эксперт по жданию.",
+    "final": "Ну всё, теперь жёстко сменил сидение на стуле с офисного на своё – ни там, ни тут работать не собрался.",
+    "seconds": 2.81,
+    "finish_reason": "stop",
+    "edit_finish_reason": "stop",
+    "tokens": {
+      "usage": {
+        "prompt_tokens": 1212,
+        "completion_tokens": 32,
+        "total_tokens": 1244
+      },
+      "edit_usage": {
+        "prompt_tokens": 1799,
+        "completion_tokens": 32,
+        "total_tokens": 1831
+      }
+    }
+  },
+  {
+    "phase": "editor_comparison",
+    "model": "gpt-4.1",
+    "case": "ru_short",
+    "request": "@roast_bot объяснил девушке, что я альфа, теперь она не отвечает",
+    "draft": "Олег, ты, видимо, ей подробно объяснил, что альфы в природе вымирают первыми.",
+    "final": "Так ты забыл уточнить, что по шкале альфы ты где-то между Йуху и витаминами для волос.",
+    "seconds": 2.44,
+    "finish_reason": "stop",
+    "edit_finish_reason": "stop",
+    "tokens": {
+      "usage": {
+        "prompt_tokens": 1181,
+        "completion_tokens": 25,
+        "total_tokens": 1206
+      },
+      "edit_usage": {
+        "prompt_tokens": 1762,
+        "completion_tokens": 27,
+        "total_tokens": 1789
+      }
+    }
+  },
+  {
+    "phase": "editor_comparison",
+    "model": "gpt-5.4",
+    "case": "ru_productivity",
+    "request": "@roast_bot три часа выбирал приложение для продуктивности и опять нихуя не сделал",
+    "draft": "Макс опять так увлёкся продуктивностью, что до дел решил не скатываться. Сегодня он, видимо, закроет только App Store.",
+    "final": "Макс так мощно готовился закрыть задачи, что в итоге закрыл только App Store. До дел решил не опускаться, нихуя себе продуктивность.",
+    "seconds": 2.86,
+    "finish_reason": "stop",
+    "edit_finish_reason": "stop",
+    "tokens": {
+      "usage": {
+        "prompt_tokens": 1194,
+        "completion_tokens": 38,
+        "total_tokens": 1232
+      },
+      "edit_usage": {
+        "prompt_tokens": 1785,
+        "completion_tokens": 38,
+        "total_tokens": 1823
+      }
+    }
+  },
+  {
+    "phase": "editor_comparison",
+    "model": "gpt-5.4",
+    "case": "ru_target_callback",
+    "request": "@roast_bot что думаешь о @max?",
+    "draft": "@max купил кроссовки за 25к, чтобы эффективнее добегать до двери за курьером. Про бег в шесть утра пока бегает только пиздеж.",
+    "final": "@max купил кроссовки за 25к, чтобы быстрее добегать до двери за курьером. В шесть утра у него пока бегает только пиздеж.",
+    "seconds": 2.25,
+    "finish_reason": "stop",
+    "edit_finish_reason": "stop",
+    "tokens": {
+      "usage": {
+        "prompt_tokens": 1263,
+        "completion_tokens": 43,
+        "total_tokens": 1306
+      },
+      "edit_usage": {
+        "prompt_tokens": 1858,
+        "completion_tokens": 42,
+        "total_tokens": 1900
+      }
+    }
+  },
+  {
+    "phase": "editor_comparison",
+    "model": "gpt-5.4",
+    "case": "ru_failed_flex",
+    "request": "@roast_bot за выходные посмотрел 12 часов видео про бизнес, теперь думаю увольняться и открывать своё",
+    "draft": "12 часов смотрел, как другие делают бизнес, и уже собрался увольняться — ну да, после нуля резюме логично сразу перейти к нулю дохода.",
+    "final": "После нуля резюме сразу в предприниматели — красиво. 12 часов смотрел, как другие делают бизнес, и решил лично протестировать стадию «нихуя не зарабатывает».",
+    "seconds": 2.58,
+    "finish_reason": "stop",
+    "edit_finish_reason": "stop",
+    "tokens": {
+      "usage": {
+        "prompt_tokens": 1211,
+        "completion_tokens": 42,
+        "total_tokens": 1253
+      },
+      "edit_usage": {
+        "prompt_tokens": 1806,
+        "completion_tokens": 43,
+        "total_tokens": 1849
+      }
+    }
+  },
+  {
+    "phase": "editor_comparison",
+    "model": "gpt-5.4",
+    "case": "ru_short",
+    "request": "@roast_bot объяснил девушке, что я альфа, теперь она не отвечает",
+    "draft": "Объяснил, что ты альфа, так убедительно, что она решила дождаться релиза нормальной версии.",
+    "final": "Объяснил, что ты альфа, так убедительно, что она решила подождать, пока выйдет стабильная версия.",
+    "seconds": 2.26,
+    "finish_reason": "stop",
+    "edit_finish_reason": "stop",
+    "tokens": {
+      "usage": {
+        "prompt_tokens": 1180,
+        "completion_tokens": 27,
+        "total_tokens": 1207
+      },
+      "edit_usage": {
+        "prompt_tokens": 1760,
+        "completion_tokens": 30,
+        "total_tokens": 1790
+      }
+    }
+  }
+]

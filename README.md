@@ -1,6 +1,8 @@
 # RoastGPT
 
-RoastGPT is a Telegram bot that writes short, savage comebacks for a group chat. It looks for bragging, bad takes, excuses, and insults, then uses the recent conversation to write a specific punchline with sarcasm and profanity. It uses OpenAI's `gpt-4o-mini`; the sharper personality is configured in `config.py`.
+RoastGPT is a Telegram bot for short, harsh group-chat roasts in Russian or the language of your request. It uses `gpt-5.4`, writes a draft, then edits it for a sharper punchline and more natural wording. The prompts focus on specific chat details, contradictions, callbacks and uncensored profanity.
+
+By default it replies only when someone mentions its Telegram username or replies to one of its messages. Ask `@your_bot что думаешь о @max?` to roast Max using his messages in the available history.
 
 This was built as a fun project for a group chat with friends.
 
@@ -24,6 +26,12 @@ BLACKLIST_USERNAMES=username3,username4
 TARGET_CHAT_ID=-100987654321
 CLEAR_CHAT_HISTORY=false
 CHAT_HISTORY_PATH=./data/chat_history.json
+ROAST_MODEL=gpt-5.4
+ROAST_REASONING_EFFORT=low
+HUMANIZE_ROASTS=true
+MENTION_ONLY=true
+CHAT_HISTORY_LENGTH=500
+CONTEXT_MAX_BYTES=60000
 ```
 
 Username lists accept `alice,bob`, `["alice", "bob"]`, `['alice', 'bob']`, or `[alice, bob]`. Names are case-insensitive and may include `@`. Blank username lists mean no entries. `TARGET_CHAT_ID` accepts one integer or a list/comma-separated set of IDs; missing or invalid chat IDs stop startup with a readable configuration error. `OPENAI_API_KEY` is also accepted if `OPENAI_TOKEN` is unset.
@@ -71,13 +79,32 @@ Mount a Railway [volume](https://docs.railway.com/volumes) at `/data` to keep co
 
 Run one bot instance with this Telegram token. This is a polling worker, so it does not expose an HTTP port or healthcheck endpoint. For the bot to see ordinary group messages, disable its group privacy mode through BotFather or make it a group admin; see the [Telegram bot FAQ](https://core.telegram.org/bots/faq#what-messages-will-my-bot-get).
 
+The new model, editor, history limits and mention-only behavior apply by default even if your existing Railway variables omit them. You can add the optional variables from `.env.example` to override them. The image includes the runtime prompt files. Rebuild and redeploy to apply code or prompt changes.
+
 ## Reply behavior
 
-- Direct replies to this bot and `@mentions` of its actual Telegram username trigger a comeback. The old `wordle bot` phrase remains supported.
-- Whitelisted users and a random 25% of other messages are scored for roast material. A score of 8-10 triggers a reply. Change `FUZZY_USER_FILTER`, `FUZZY_PROBABILITY`, or `QUALIFICATION_THRESHOLD` in `config.py` to adjust frequency.
+- With `MENTION_ONLY=true`, only direct replies and mentions of this bot's actual username trigger an API request. Whitelisting does not make it speak spontaneously.
+- Ordinary incoming messages still build context. Receiving a message and replying to it are separate decisions.
+- With `MENTION_ONLY=false`, the original automatic behavior is available: whitelist/fuzzy eligibility followed by an 8-10 roast score, plus the legacy `wordle bot` trigger. The inexpensive `gpt-4o-mini` scores messages; `ROAST_MODEL` writes the jokes. Frequency settings remain in `config.py`.
 - Blacklisted usernames are excluded from every trigger. Bot messages are ignored.
-- The roast prompt asks for 1-2 sharp sentences with natural profanity and specific callbacks, and instructs the model to drop the roast for genuine distress or a request to stop. It no longer forces Singaporean slang onto every conversation.
-- Each configured chat keeps its own last 40 messages. Original single-chat history files migrate automatically; ambiguous legacy history with multiple chat IDs requires choosing one chat to migrate or explicitly resetting it.
+- The prompt asks for 1-2 sentences, a concrete comic observation and a strong ending. It allows harsh language while telling the model to respect genuine distress and requests to stop.
+- Requests about another user name that user explicitly. The prompt asks for example messages if the target has no material in context.
+
+## Jokes and the editing pass
+
+Edit [prompts/roast.md](prompts/roast.md) to change the personality. [prompts/humanizer.md](prompts/humanizer.md) contains the runtime editing rules inspired by the Humanizer skill: remove stock openings, vague insults, stale comparisons, translated phrasing, explanations after the punchline and invented facts. The editor should preserve profanity and an already good joke.
+
+`HUMANIZE_ROASTS=true` makes two sequential model requests per reply, sending the available context to both. If editing fails, the completed draft is sent. Set it to `false` to use one request. Larger histories and the stronger model increase API cost. `ROAST_MODEL=gpt-5.4-mini` or `gpt-4.1` also work, but gave weaker results in the small Russian comparison. See the [model and comedy research notes](docs/roast-design.md) for examples, sources and limitations.
+
+`ROAST_REASONING_EFFORT=low` gives GPT-5.4 a small reasoning budget. It also accepts `none` and `medium`; this setting is ignored for the tested GPT-4 models. Requests allow 1600 completion tokens with reasoning, including hidden reasoning, or 320 with `none`. The prompt still asks for a short reply. Incomplete responses are discarded.
+
+## Conversation history
+
+- `CHAT_HISTORY_LENGTH=500` stores up to 500 messages per chat, including the bot's sent replies. It accepts 1-5000.
+- New records contain the author's display name, username, Telegram user ID, timestamp, text and a snapshot of the replied-to message. This helps distinguish the requester from the roast target. Spoiler text is redacted.
+- Each model request gets the newest contiguous messages that fit `CONTEXT_MAX_BYTES=60000`. This is a UTF-8 JSON byte budget for history, not a token count; system instructions and the current request are additional. It accepts 4096-200000. Short messages allow more history than long messages. An oversized newest entry is visibly truncated only in the model context; the stored entry remains intact.
+- Histories are isolated by chat ID. Original string records remain readable, but their missing usernames and user IDs cannot be recovered. New messages gradually replace them. An ambiguous legacy global history requires selecting one chat to migrate or explicitly resetting it.
+- The bot only knows messages Telegram delivered while it was running. It does not fetch a group's earlier message archive or look up private information about a tagged user.
 
 ## Tests
 
@@ -86,6 +113,15 @@ pipenv run python -m unittest discover -s tests -v
 ```
 
 The tests use mocked OpenAI and Telegram calls; they do not send messages or spend API credits.
+
+For an explicit paid comparison using fictional conversations only:
+
+```bash
+pipenv run python evals/compare_models.py --models gpt-4o-mini gpt-4.1 gpt-5.4-mini gpt-5.4 --limit 4 --humanize
+pipenv run python evals/compare_models.py --models gpt-5.4 --limit 8 --humanize --long-context
+```
+
+The second command also exercises a 500-message conversation and applies the same history budget as the bot. Results include drafts, final replies, token usage and elapsed time. Neither command connects to Telegram. Generated text still needs human review; successful API calls do not prove a joke is good.
 
 ## Contributing
 
